@@ -1,6 +1,6 @@
 # GoMicro
 
-This is a code I wrote for testing. It is a 'useless piece' of code which creates four microservices written in Go and uses a remote DB2 database to store the data.
+This is a code I wrote for testing. It is a 'useless piece of code' which creates four microservices written in Go and uses a remote DB2 database to store the data.
 The solution also uses two local docker images for deploying a Kakfa server for messaging and a PostgreSQL database.
 
 * Members  
