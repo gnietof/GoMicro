@@ -11,7 +11,7 @@ Reads locations from a remote DB2 database.
 Gets a list of locations using REST to communicate with the Members service and sends them (using a goroutine for each of them) one at a time using Kafka to the Receiver service.
 * Receiver  
 Receives each of the locations sent through Kafka and stores them one at a time (using a goroutine for each of them) in a table in the Postgres database.
-* Receiver  
+* Receiver2  
 Receives each of the locations sent through Kafka and stores them one at a time (using a goroutine for each of them) in a collection in the Mongo database.
 
 
