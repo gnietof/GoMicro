@@ -33,7 +33,7 @@ func main() {
 		return
 	}
 
-	for _, location := range locations {
+	for _, location := range locations[:5] {
 		wg.Add(1)
 		go sendLocation(ctx, location, &wg, locs)
 	}

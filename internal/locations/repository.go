@@ -16,7 +16,7 @@ func NewLocationsRepository() *LocationsRepository {
 
 func (m *LocationsRepository) GetLocations() ([]model.Location, error) {
 
-	rows, err := m.DB.DB.Query("SELECT WLC,CAMPUS_NAME,CAMPUS_ID,COUNTRY,CITY FROM ER_POPULATIONS.LOCS")
+	rows, err := m.DB.DB.Query("SELECT WLC,CAMPUS_NAME,CAMPUS_ID,GEO,COUNTRY,CITY FROM ER_POPULATIONS.LOCS")
 	if err != nil {
 		print(err)
 	}
@@ -26,7 +26,7 @@ func (m *LocationsRepository) GetLocations() ([]model.Location, error) {
 
 	for rows.Next() {
 		var location model.Location
-		rows.Scan(&location.WLC, &location.CampusId, &location.CampusName, &location.Country, &location.City)
+		rows.Scan(&location.WLC, &location.CampusId, &location.CampusName, &location.Geo, &location.Country, &location.City)
 
 		locations = append(locations, location)
 
