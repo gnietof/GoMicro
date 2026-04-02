@@ -41,6 +41,58 @@ LOCATIONS_SERVICE=http://localhost:8080
 MEMBERS_SERVICE=http://localhost:8081
 ```
 
+## MongoDB
+The service **receiver2** sends all locations received through Kafka from the **sender** service into the MongoDB.
+
+I have been doing some testing from mongosh. 
+First we need to access **mongosh**:
+
+```
+docker exec -it <mongo container Id> mongosh -u <mongo user> -p <mongo password>
+```
+
+<img width="723" height="290" alt="image" src="https://github.com/user-attachments/assets/d43056d4-bae0-4a78-8f90-6d79b52e87e5" />
+
+We use the command show databases to see the existing ones and then select the **ibm** one:
+```
+show databases
+
+use ibm
+```
+<img width="380" height="146" alt="image" src="https://github.com/user-attachments/assets/b666169b-b961-4110-86c0-6dc00efda924" />
+
+### Index
+I create an index to find documents based on the country:
+```
+db.locations.createIndex( {country: "text" } )
+```
+
+### Find
+We might find records in two different ways:  
+```
+db.locations.find({ city: "Madrid" })
+db.locations.find({$text: {$search: "Spain"}})
+```
+
+
+### Agregations
+```
+db.locations.aggregate([
+  {
+    $group: {
+      _id: "$country",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { count: -1 } // descending
+  }
+])
+```
+
+
+
+
 
 
 
